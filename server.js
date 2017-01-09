@@ -5,6 +5,19 @@ var express = require('express');
 var request = require('request');
 var serveStatic = require('serve-static');
 
+/*
+	!! API KEY required !!
+	Register for a Shodan developer account to get your API key.
+*/
+var shodanApiKey = '';
+
+if (!shodanApiKey) {
+	console.log('--- NOTICE: ---');
+	console.log('Shodan API key required.');
+	console.log('Register for an account (https://account.shodan.io/register) to get your API key.');
+	console.log('---------------');
+}
+
 // Create our express app.
 var app = express();
 
@@ -36,7 +49,7 @@ app.get('/search', function(req, res, next) {
 		method: 'get',
 		url: 'https://api.shodan.io/shodan/host/search',
 		qs: {
-			key: 's1MahRaHDgjlmptSsf6y7oCcyz4AjB9Q',
+			key: shodanApiKey,
 			query: req.query.q,
 			minify: true
 		}
